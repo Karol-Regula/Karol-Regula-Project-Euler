@@ -1,4 +1,6 @@
 //C
+//Have to compile with "gcc euler.c -lm"
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -37,6 +39,33 @@ int problem2(){
     return total;
 }
 
+long problem3(long n){
+    double temp = sqrt(n);  
+    long answer = temp;
+    long tester = 2;
+    long isPrime = 1;
+    while (answer > 0){
+	if (n % answer == 0){//is a factor, test for primeness
+	    tester = 2;
+	    while (tester < answer){
+		//long x = answer % tester;
+		//printf("%ld, %ld, %ld \n",answer, tester,x);
+		if (answer % tester == 0){
+		    isPrime = 0;
+		    tester = answer;//stops loop
+		}
+		tester++;
+	    }
+	    if (isPrime == 1){
+		return answer;
+	    }
+	}
+	answer--;
+	isPrime = 1;
+    }
+    return 0;
+}
+
 int main(){
 
     int p1 = problem1();
@@ -44,8 +73,9 @@ int main(){
 
     int p2 = problem2();
     printf("Problem 2: %d \n", p2);
+
+    int p3 = problem3(600851475143);
+    printf("Problem 3: %d \n", p3);
   
     return 0;
 }
-
-
